@@ -6,19 +6,19 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-let lastFetch = "";
+const data = {};
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");
 });
 
 app.get("/get", (req, res) => {
-	res.status(200).type("text/plain").send(lastFetch);
+	res.status(200).type("text/plain").send(data);
 });
 
 app.post("/store", (req, res) => {
 	try {
-		lastFetch = req.body.content;
+		data[req.body.i] = req.body.content;
 		res.status(200).send(req.body.content);
 	} catch {
 		res.status(500).send("ERROR");
